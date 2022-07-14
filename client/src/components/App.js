@@ -72,7 +72,7 @@ function App() {
 
   console.log(authenticatedUser);
   console.log(authenticatedUser.id);
-  console.log(favorites)
+  console.log(favorites);
 
   return (
     <div className="App">
