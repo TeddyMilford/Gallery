@@ -48,18 +48,31 @@ function App() {
       .then((newUser) => handleLogin(newUser));
   }
 
+  // "♥ Favorited"
   function addToFavorites(piece, e) {
-    if (e.target.innerText === "♥ Favorited") {
+    if (e.target.innerText === "♡ Favorite") {
       console.log(authenticatedUser.first_name + " unfavorited " + piece.title);
-      fetch()
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      fetch("http://127.0.0.1:4200/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: authenticatedUser.id,
+          artwork_id: piece.id,
+        }),
+      }).then(console.log("Did it"));
     }
 
-    if (e.target.innerText === "♡ Favorite") {
+    if (e.target.innerText === "♥ Favorited") {
       console.log(authenticatedUser.first_name + " favorited " + piece.title);
+      fetch("http://127.0.0.1:4200/favorites/", {
+        method: "DELETE",
+      });
     }
   }
+
+  console.log(authenticatedUser);
+  console.log(authenticatedUser.id);
+  console.log(favorites)
 
   return (
     <div className="App">
