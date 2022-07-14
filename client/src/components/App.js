@@ -30,6 +30,10 @@ function App() {
     setAuthenticatedUser(user);
   }
 
+  function handleLogout() {
+    setAuthenticatedUser({});
+  }
+
   function fetchUserFavoriteArtworks(authenticatedUser) {
     return fetch(
       `http://127.0.0.1:4200/users/${authenticatedUser.id}?include_artworks`
@@ -88,13 +92,19 @@ function App() {
           />
         </Route>
         <Route path="/signup">
-          <NewUserForm existingUsers={allUsers} postNewUser={postNewUser} />
+          <NewUserForm
+            existingUsers={allUsers}
+            handleLogin={handleLogin}
+            postNewUser={postNewUser}
+          />
         </Route>
         <Route path="/home">
           <HomePage
             artCollection={artCollection}
             favorites={favorites}
             addToFavorites={addToFavorites}
+            authenticatedUser={authenticatedUser}
+            handleLogout={handleLogout}
           />
         </Route>
       </Switch>

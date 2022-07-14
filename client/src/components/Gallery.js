@@ -1,10 +1,8 @@
 import React from "react";
 import Card from "./Card";
 
-function Gallery({ favorites, addToFavorites }) {
+function Gallery({ favorites, addToFavorites, getArtworkDetails }) {
   let deck;
-
-  console.log(favorites);
 
   if (favorites.length === 0) {
     deck = <h1>You have don't have any favorites yet!</h1>;
@@ -16,6 +14,7 @@ function Gallery({ favorites, addToFavorites }) {
           piece={piece}
           addToFavorites={addToFavorites}
           favorites={favorites}
+          getArtworkDetails={getArtworkDetails}
         />
       );
     });

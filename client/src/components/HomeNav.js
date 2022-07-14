@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 const navigation = [
   { name: "Discover", href: "#", current: true },
   { name: "Gallery", href: "#", current: false },
+  { name: "Update Account", href: "#", current: false },
+  { name: "Logout", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -17,7 +19,13 @@ export default function HomeNav() {
   const history = useHistory();
 
   function handleNav(item) {
-    history.push(`/home/${item.name.toLowerCase()}`);
+    if (item.name === "Logout") {
+      history.push(`/`);
+    } else if (item.name === "Update Account") {
+      history.push(`/home/updateaccount`);
+    } else {
+      history.push(`/home/${item.name.toLowerCase()}`);
+    }
   }
   return (
     <Disclosure as="nav" className="bg-gray-800">

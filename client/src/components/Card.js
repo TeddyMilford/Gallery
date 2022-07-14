@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-function Card({ piece, addToFavorites, favorites }) {
+function Card({ piece, addToFavorites, favorites, getArtworkDetails }) {
   const [cardFavorited, setCardFavorited] = useState(false);
+  const history = useHistory();
 
-  let title = piece.title;
-  let image = piece.img_link;
-  let artist = piece.artist;
-  let url = `https://www.artic.edu/iiif/2/${image}/full/843,/0/default.jpg`;
+  const { title, img_link, artist, key } = piece;
+  const url = `https://www.artic.edu/iiif/2/${img_link}/full/843,/0/default.jpg`;
+  const favoriteButtonSyntax = cardFavorited ? "♥ Favorited" : "♡ Favorite";
 
   // const tog = watchData.find((c) => {
   //   return c.id === coin.id;
@@ -18,8 +19,16 @@ function Card({ piece, addToFavorites, favorites }) {
 
   // let favoriteButtonSyntax = cardFavorited ? "♥ Favorited" : "♡ Favorite";
 
+  function showArtworkDetails(event) {
+    if (event.target.innerText !== favoriteButtonSyntax) {
+      getArtworkDetails(key).then(() => history.push("/home/details"));
+    }
+  }
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg">
+    <div
+      className="max-w-sm rounded-lg overflow-hidden shadow-lg"
+      onClick={showArtworkDetails}
+    >
       <img
         className="w-full"
         src={url}

@@ -9,15 +9,14 @@ function LoginForm({ existingUsers, handleLogin, fetchUserFavoriteArtworks }) {
 
   function onLogin(e) {
     e.preventDefault();
-    console.log("Clicked");
 
     const authenticatedUser = existingUsers.find(
       (existingUser) =>
         (existingUser.username === usernameField) &
         (existingUser.password === passwordField)
     );
-    console.log("Authenticated " + authenticatedUser);
     if (authenticatedUser !== undefined) {
+      console.log(authenticatedUser);
       handleLogin(authenticatedUser);
       fetchUserFavoriteArtworks(authenticatedUser);
       setUsernameField("");
@@ -47,7 +46,6 @@ function LoginForm({ existingUsers, handleLogin, fetchUserFavoriteArtworks }) {
               placeholder="Your Username"
               onChange={(e) => {
                 setUsernameField(e.target.value);
-                // console.log(e.target.value);
               }}
             />
           </div>
@@ -67,9 +65,7 @@ function LoginForm({ existingUsers, handleLogin, fetchUserFavoriteArtworks }) {
           <div className="flex justify-center items-center mt-6">
             <button
               type="submit"
-              onClick={(e) => {
-                console.log("please");
-              }}
+              onClick={(e) => {}}
               className={`bg-green py-2 px-4 text-sm text-black rounded border border-green focus:outline-none focus:border-green-dark`}
             >
               Login
