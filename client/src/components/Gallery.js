@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-function Gallery({ favorites }) {
+function Gallery({ favorites, addToFavorites }) {
   let deck;
 
   console.log(favorites);
@@ -10,7 +10,14 @@ function Gallery({ favorites }) {
     deck = <h1>You have don't have any favorites yet!</h1>;
   } else {
     deck = favorites.map((piece) => {
-      return <Card key={piece.id} piece={piece} />;
+      return (
+        <Card
+          key={piece.id}
+          piece={piece}
+          addToFavorites={addToFavorites}
+          favorites={favorites}
+        />
+      );
     });
   }
   return (

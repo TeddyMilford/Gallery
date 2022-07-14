@@ -8,31 +8,6 @@ import LoginForm from "./LoginForm";
 import NewUserForm from "./NewUserForm";
 import HomePage from "./HomePage";
 
-// const showLandingPage = () => {
-//   if (window.location.pathname === "/") return <LandingPage />;
-// };
-
-// const showLoginForm = (collection) => {
-//   if (window.location.pathname === "/login")
-//     return <LoginForm collection={collection} />;
-// };
-// const showUserForm = (collection) => {
-//   if (window.location.pathname === "/newuser")
-//     return <NewUserForm collection={collection} />;
-// };
-// const showHome = () => {
-//   if (window.location.pathname === "/home") return <HomePage />;
-// };
-// const showGallery = (collection) => {
-//   if (window.location.pathname === "/gallery")
-//     return <Gallery collection={collection} />;
-// };
-
-// const showDiscover = (collection) => {
-//   if (window.location.pathname === "/discover")
-//     return <Discover collection={collection} />;
-// };
-
 function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
@@ -73,6 +48,19 @@ function App() {
       .then((newUser) => handleLogin(newUser));
   }
 
+  function addToFavorites(piece, e) {
+    if (e.target.innerText === "♥ Favorited") {
+      console.log(authenticatedUser.first_name + " unfavorited " + piece.title);
+      fetch()
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+
+    if (e.target.innerText === "♡ Favorite") {
+      console.log(authenticatedUser.first_name + " favorited " + piece.title);
+    }
+  }
+
   return (
     <div className="App">
       <Switch>
@@ -90,25 +78,13 @@ function App() {
           <NewUserForm existingUsers={allUsers} postNewUser={postNewUser} />
         </Route>
         <Route path="/home">
-          <HomePage artCollection={artCollection} favorites={favorites} />
+          <HomePage
+            artCollection={artCollection}
+            favorites={favorites}
+            addToFavorites={addToFavorites}
+          />
         </Route>
       </Switch>
-
-      {/* <LandingPage />
-      <HomePage /> */}
-      {/* {showLandingPage()}
-      {showLoginForm({
-        allUsers,
-        handleLogin,
-        fetchUserFavoriteArtworks,
-        handleLoadingFavorites,
-        handleTester,
-      })}
-      {showUserForm({ allUsers, postNewUser })}
-      {showHome()}
-      {showGallery(favorites)}
-      {showDiscover(artCollection)} */}
-      {/* <ArtworkDetail /> */}
     </div>
   );
 }

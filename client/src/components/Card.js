@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Card({ piece }) {
+function Card({ piece, addToFavorites, favorites }) {
   const [cardFavorited, setCardFavorited] = useState(false);
 
   let title = piece.title;
@@ -8,13 +8,18 @@ function Card({ piece }) {
   let artist = piece.artist;
   let url = `https://www.artic.edu/iiif/2/${image}/full/843,/0/default.jpg`;
 
-  let favoriteButtonSyntax = cardFavorited ? "♥ Favorited" : "♡ Favorite";
+  // const tog = watchData.find((c) => {
+  //   return c.id === coin.id;
+  // });
+
+  const tog = favorites.find((c) => {
+    return c.id === piece.id;
+  });
+
+  // let favoriteButtonSyntax = cardFavorited ? "♥ Favorited" : "♡ Favorite";
 
   return (
-    <div
-      className="max-w-sm rounded-lg overflow-hidden shadow-lg"
-      onClick={(event) => console.log(`${event.target.innerText}`)}
-    >
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg">
       <img
         className="w-full"
         src={url}
@@ -29,14 +34,14 @@ function Card({ piece }) {
       </div>
       <div
         onClick={(event) => {
-          setCardFavorited(!cardFavorited);
-          console.log(`${event.target.innerText}`);
+          // setCardFavorited(!cardFavorited);
+          addToFavorites(piece, event);
         }}
         className="px-6 pb-2 flex justify-end"
         id="favorite"
       >
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          {favoriteButtonSyntax}
+          {tog ? "♥ Favorited" : "♡ Favorite"}
         </span>
       </div>
     </div>
